@@ -1,6 +1,5 @@
 """Tests for the destroy command."""
 
-
 from click.testing import CliRunner
 
 from hermes_multi_agent_team.cli import cli

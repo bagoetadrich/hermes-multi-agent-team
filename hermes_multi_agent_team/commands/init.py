@@ -51,9 +51,7 @@ def _get_templates_dir() -> Path:
     """Get the templates directory path."""
     try:
         # Python 3.9+
-        return Path(
-            resources.files("hermes_multi_agent_team.templates").joinpath("SOUL")
-        )
+        return Path(resources.files("hermes_multi_agent_team.templates").joinpath("SOUL"))
     except (AttributeError, FileNotFoundError):
         # Fallback: read from filesystem
         return Path(__file__).resolve().parent.parent / "templates" / "SOUL"
@@ -129,20 +127,25 @@ def init_team(
     team_members = []
     for role_key in role_keys:
         config = ROLE_DEFAULTS[role_key]
-        team_members.append({
-            "name": config["name"],
-            "nickname": config["nickname"],
-            "role": config["role"],
-            "open_id": f"ou_xxx_{role_key}",  # placeholder, filled by collect-ids
-        })
+        team_members.append(
+            {
+                "name": config["name"],
+                "nickname": config["nickname"],
+                "role": config["role"],
+                "open_id": f"ou_xxx_{role_key}",  # placeholder, filled by collect-ids
+            }
+        )
 
     # Add coordinator (the main profile, usually 'weixin')
-    team_members.insert(0, {
-        "name": "M总",
-        "nickname": "小m",
-        "role": "总管",
-        "open_id": "ou_xxx_coordinator",
-    })
+    team_members.insert(
+        0,
+        {
+            "name": "M总",
+            "nickname": "小m",
+            "role": "总管",
+            "open_id": "ou_xxx_coordinator",
+        },
+    )
 
     # Add owner
     owner_open_id = "ou_xxx_owner"  # placeholder

@@ -16,12 +16,32 @@ ENV_SCHEMA: list[dict[str, str | bool]] = [
     {"key": "FEISHU_APP_ID", "prompt": "Feishu App ID", "default": "", "secret": False},
     {"key": "FEISHU_APP_SECRET", "prompt": "Feishu App Secret", "default": "", "secret": True},
     {"key": "FEISHU_DOMAIN", "prompt": "Feishu Domain", "default": "feishu", "secret": False},
-    {"key": "FEISHU_CONNECTION_MODE", "prompt": "Connection Mode", "default": "websocket", "secret": False},
+    {
+        "key": "FEISHU_CONNECTION_MODE",
+        "prompt": "Connection Mode",
+        "default": "websocket",
+        "secret": False,
+    },
     {"key": "FEISHU_DM_POLICY", "prompt": "DM Policy", "default": "pairing", "secret": False},
-    {"key": "FEISHU_ALLOW_ALL_USERS", "prompt": "Allow All Users", "default": "false", "secret": False},
-    {"key": "FEISHU_ALLOWED_USERS", "prompt": "Allowed Users (comma-separated, or empty)", "default": "", "secret": False},
+    {
+        "key": "FEISHU_ALLOW_ALL_USERS",
+        "prompt": "Allow All Users",
+        "default": "false",
+        "secret": False,
+    },
+    {
+        "key": "FEISHU_ALLOWED_USERS",
+        "prompt": "Allowed Users (comma-separated, or empty)",
+        "default": "",
+        "secret": False,
+    },
     {"key": "FEISHU_ALLOW_BOTS", "prompt": "Allow Bots", "default": "all", "secret": False},
-    {"key": "FEISHU_REQUIRE_MENTION", "prompt": "Require @mention", "default": "false", "secret": False},
+    {
+        "key": "FEISHU_REQUIRE_MENTION",
+        "prompt": "Require @mention",
+        "default": "false",
+        "secret": False,
+    },
 ]
 
 
@@ -56,8 +76,7 @@ def configure_team(prefix: str, dry_run: bool) -> None:
 
     if not profiles:
         raise click.ClickException(
-            f"❌ No profiles found with prefix '{prefix}'. "
-            f"Run 'hermes-team init' first."
+            f"❌ No profiles found with prefix '{prefix}'. Run 'hermes-team init' first."
         )
 
     click.echo(f"\n⚙️  Configuring {len(profiles)} profile(s) with prefix '{prefix}'")
@@ -83,8 +102,10 @@ def configure_team(prefix: str, dry_run: bool) -> None:
 
         if share_app:
             # Use shared values, prompt for the rest
-            env_vars = {k: str(existing.get(k) or f["default"]) for k, f in
-                        zip([f["key"] for f in ENV_SCHEMA], ENV_SCHEMA)}
+            env_vars = {
+                k: str(existing.get(k) or f["default"])
+                for k, f in zip([f["key"] for f in ENV_SCHEMA], ENV_SCHEMA)
+            }
             env_vars["FEISHU_APP_ID"] = shared_app_id
             env_vars["FEISHU_APP_SECRET"] = shared_app_secret
             click.echo(f"\n  📝 {profile_name}: using shared App ID/Secret")

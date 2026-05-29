@@ -65,7 +65,5 @@ def list_team_profiles(prefix: str) -> list[str]:
     if not profiles_dir.is_dir():
         return []
     return sorted(
-        p.name
-        for p in profiles_dir.iterdir()
-        if p.is_dir() and p.name.startswith(prefix)
+        p.name for p in profiles_dir.iterdir() if p.is_dir() and p.name.startswith(prefix)
     )

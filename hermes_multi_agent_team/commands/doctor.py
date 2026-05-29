@@ -23,13 +23,18 @@ def _check_hermes_installed() -> tuple[bool, str, str]:
     hermes_path = shutil.which("hermes")
     if hermes_path:
         return True, hermes_path, ""
-    return False, "not found", "Install: curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash"
+    return (
+        False,
+        "not found",
+        "Install: curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash",
+    )
 
 
 def _check_click() -> tuple[bool, str, str]:
     """Check click package."""
     try:
         import importlib.metadata
+
         ver = importlib.metadata.version("click")
         return True, ver, ""
     except (ImportError, importlib.metadata.PackageNotFoundError):
@@ -40,6 +45,7 @@ def _check_dotenv() -> tuple[bool, str, str]:
     """Check python-dotenv package."""
     try:
         import importlib.metadata
+
         ver = importlib.metadata.version("python-dotenv")
         return True, ver, ""
     except (ImportError, importlib.metadata.PackageNotFoundError):
@@ -50,6 +56,7 @@ def _check_jinja2() -> tuple[bool, str, str]:
     """Check Jinja2 package."""
     try:
         import jinja2
+
         return True, jinja2.__version__, ""
     except ImportError:
         return False, "not installed", "pip install jinja2>=3.0"

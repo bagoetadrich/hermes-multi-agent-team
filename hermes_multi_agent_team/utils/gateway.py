@@ -76,7 +76,11 @@ def gateway_status(name: str) -> dict[str, str | int | None]:
     from hermes_multi_agent_team.utils.profile import get_profile_dir
 
     log_path = get_profile_dir(name) / "logs" / "gateway.log"
-    result: dict[str, str | int | None] = {"pid": None, "connected": False, "last_message_time": None}
+    result: dict[str, str | int | None] = {
+        "pid": None,
+        "connected": False,
+        "last_message_time": None,
+    }
 
     # Find PID via pidfile or process list
     pid = _find_gateway_pid(name)
@@ -116,7 +120,9 @@ def _find_gateway_pid(name: str) -> int | None:
     try:
         out = subprocess.run(
             ["pgrep", "-f", f"hermes.*--profile.*{name}.*gateway"],
-            capture_output=True, text=True, timeout=5,
+            capture_output=True,
+            text=True,
+            timeout=5,
         )
         if out.returncode == 0 and out.stdout.strip():
             return int(out.stdout.strip().split("\n")[0])

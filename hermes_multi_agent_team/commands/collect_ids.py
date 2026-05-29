@@ -39,8 +39,7 @@ def collect_team_ids(prefix: str) -> None:
 
     if not profiles:
         raise click.ClickException(
-            f"❌ No profiles found with prefix '{prefix}'. "
-            f"Run 'hermes-team init' first."
+            f"❌ No profiles found with prefix '{prefix}'. Run 'hermes-team init' first."
         )
 
     click.echo(f"\n🔍 Collecting open_ids from {len(profiles)} profile(s)")
@@ -91,7 +90,9 @@ def collect_team_ids(prefix: str) -> None:
             click.echo(f"  ⚠️  {profile_name}: no bot IDs found in logs")
 
     if not global_mapping:
-        click.echo("\n❌ No open_ids found! Make sure gateways are running and have received messages.")
+        click.echo(
+            "\n❌ No open_ids found! Make sure gateways are running and have received messages."
+        )
         click.echo("   Tips:")
         click.echo("   - Send a message in the Feishu group to trigger bot responses")
         click.echo("   - Wait a minute for logs to accumulate")

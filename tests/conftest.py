@@ -54,4 +54,6 @@ def mock_subprocess_fail(monkeypatch: pytest.MonkeyPatch):
 @pytest.fixture()
 def mock_which_hermes(monkeypatch: pytest.MonkeyPatch):
     """Mock shutil.which to return a fake hermes path."""
-    monkeypatch.setattr("shutil.which", lambda name: "/usr/local/bin/hermes" if name == "hermes" else None)
+    monkeypatch.setattr(
+        "shutil.which", lambda name: "/usr/local/bin/hermes" if name == "hermes" else None
+    )

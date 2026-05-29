@@ -50,16 +50,14 @@ def start_team(prefix: str, dry_run: bool) -> None:
 
     if not profiles:
         raise click.ClickException(
-            f"❌ No profiles found with prefix '{prefix}'. "
-            f"Run 'hermes-team init' first."
+            f"❌ No profiles found with prefix '{prefix}'. Run 'hermes-team init' first."
         )
 
     hermes_bin = find_hermes_bin()
 
     if not Path(hermes_bin).exists() and not dry_run:
         raise click.ClickException(
-            f"❌ Hermes binary not found at {hermes_bin}\n"
-            f"   Please install Hermes Agent first."
+            f"❌ Hermes binary not found at {hermes_bin}\n   Please install Hermes Agent first."
         )
 
     click.echo(f"\n🔌 Starting gateways for {len(profiles)} profile(s)")

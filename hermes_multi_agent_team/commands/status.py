@@ -46,15 +46,16 @@ def team_status(prefix: str) -> None:
 
     if not profiles:
         raise click.ClickException(
-            f"❌ No profiles found with prefix '{prefix}'. "
-            f"Run 'hermes-team init' first."
+            f"❌ No profiles found with prefix '{prefix}'. Run 'hermes-team init' first."
         )
 
     click.echo(f"\n📊 Team Status — prefix: '{prefix}'")
     click.echo(f"   Found {len(profiles)} profile(s)\n")
 
     # Table header
-    click.echo(f"   {'Profile':<20} {'Gateway':<12} {'Connected':<12} {'PID':<8} {'Last Active':<15}")
+    click.echo(
+        f"   {'Profile':<20} {'Gateway':<12} {'Connected':<12} {'PID':<8} {'Last Active':<15}"
+    )
     click.echo("   " + "─" * 67)
 
     running_count = 0

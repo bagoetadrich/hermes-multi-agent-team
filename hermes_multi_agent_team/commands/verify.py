@@ -72,7 +72,13 @@ def _check_profile(profile_name: str) -> dict[str, tuple[bool, str]]:
         placeholder_pattern = re.compile(r'user_id="ou_xxx[^"]*"')
         has_placeholders = bool(placeholder_pattern.search(soul))
         real_id_pattern = re.compile(r'user_id="(ou_[a-zA-Z0-9]+)"')
-        real_ids = set(real_id_pattern.findall(soul)) - {"ou_xxx_pm", "ou_xxx_fe", "ou_xxx_be", "ou_xxx_qa", "ou_xxx_ui"}
+        real_ids = set(real_id_pattern.findall(soul)) - {
+            "ou_xxx_pm",
+            "ou_xxx_fe",
+            "ou_xxx_be",
+            "ou_xxx_qa",
+            "ou_xxx_ui",
+        }
 
         if has_placeholders and not real_ids:
             checks["open_ids"] = (False, "SOUL.md still has placeholder open_ids")
@@ -107,8 +113,7 @@ def verify_team(prefix: str) -> None:
 
     if not profiles:
         raise click.ClickException(
-            f"❌ No profiles found with prefix '{prefix}'. "
-            f"Run 'hermes-team init' first."
+            f"❌ No profiles found with prefix '{prefix}'. Run 'hermes-team init' first."
         )
 
     click.echo(f"\n✅ Verifying {len(profiles)} profile(s) with prefix '{prefix}'\n")
@@ -139,7 +144,8 @@ def verify_team(prefix: str) -> None:
         click.echo("🎉 ALL CHECKS PASSED! Your team is ready to go!")
     else:
         failed_profiles = [
-            name for name, checks in profile_results.items()
+            name
+            for name, checks in profile_results.items()
             if not all(ok for ok, _ in checks.values())
         ]
         click.echo(f"⚠️  Some checks failed for: {', '.join(failed_profiles)}")

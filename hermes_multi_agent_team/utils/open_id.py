@@ -99,7 +99,7 @@ def update_soul_md_open_ids(soul_path: str | Path, open_id_mapping: dict[str, st
         return False
 
     # Find the end of the section (next heading or end of file)
-    next_heading = re.search(r"\n【[^】]+】", content[section_start + 1:])
+    next_heading = re.search(r"\n【[^】]+】", content[section_start + 1 :])
     if next_heading:
         section_end = section_start + 1 + next_heading.start()
     else:
