@@ -1,16 +1,19 @@
 # 🚀 hermes-multi-agent-team
 
-**10 分钟搭建你的 AI Agent 团队 —— Hermes + 飞书多 Agent 协作自动化工具**
+**10 分钟搭建你的 AI Agent 团队 —— Hermes + 多平台多 Agent 协作自动化工具**
+
+> 🇨🇳 中文 | 🇬🇧 [English](README_EN.md)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
 [![Hermes Agent](https://img.shields.io/badge/Hermes-Agent-green.svg)](https://github.com/NousResearch/hermes-agent)
+[![CI](https://github.com/bagoetadrich/hermes-multi-agent-team/actions/workflows/ci.yml/badge.svg)](https://github.com/bagoetadrich/hermes-multi-agent-team/actions/workflows/ci.yml)
 
 ---
 
 ## 🤔 这是什么？
 
-`hermes-multi-agent-team` 是一个 CLI 工具，自动化搭建基于 [Hermes Agent](https://github.com/NousResearch/hermes-agent) 的多 Agent 协作团队，通过飞书群聊实现 Agent 之间的实时协作。
+`hermes-multi-agent-team` 是一个 CLI 工具，自动化搭建基于 [Hermes Agent](https://github.com/NousResearch/hermes-agent) 的多 Agent 协作团队，通过消息平台（飞书、Telegram、Discord、Slack）实现 Agent 之间的实时协作。
 
 **手动搭建一个 6 人 Agent 团队需要：**
 - 创建 6 个飞书应用
@@ -51,7 +54,7 @@ hermes-team verify --prefix MyTeam
 ## 📐 架构
 
 ```
-飞书群聊
+消息平台（飞书 / Telegram / Discord / Slack）
 ├── 🧠 总管 (Coordinator)  ← 任务拆解、分配、汇总
 ├── 📋 产品经理 (PM)       ← PRD、需求、用户故事
 ├── 💻 前端开发 (Frontend)  ← Vue/React/CSS
@@ -61,7 +64,16 @@ hermes-team verify --prefix MyTeam
 └── 👤 主人 (You)           ← 提需求、做决策
 ```
 
-每个 Agent = **独立 Hermes Profile** + **独立飞书应用** + **独立 SOUL.md 人设**
+每个 Agent = **独立 Hermes Profile** + **独立平台 Bot** + **独立 SOUL.md 人设**
+
+### 🌐 支持的平台
+
+| 平台 | 状态 | 配置项 |
+|------|------|--------|
+| **飞书 / Lark** | ✅ 完整支持 | `FEISHU_APP_ID`, `FEISHU_APP_SECRET` |
+| **Telegram** | ✅ 支持 | `TELEGRAM_BOT_TOKEN` |
+| **Discord** | ✅ 支持 | `DISCORD_BOT_TOKEN`, `DISCORD_APP_ID` |
+| **Slack** | ✅ 支持 | `SLACK_BOT_TOKEN`, `SLACK_APP_TOKEN` |
 
 ### 🔄 Hub-and-Spoke 协作模式
 
@@ -125,22 +137,29 @@ hermes --version
 **前置要求：**
 - Python 3.10+
 - [Hermes Agent](https://github.com/NousResearch/hermes-agent) 已安装
-- 飞书开放平台账号（每个 Agent 角色需要一个独立的飞书应用）
+- 消息平台账号（飞书/Telegram/Discord/Slack，每个 Agent 需要一个独立的 Bot）
 
 ---
 
 ## 🎯 快速开始
 
-### Step 1: 创建飞书应用（手动）
+### Step 1: 创建平台 Bot（手动）
 
-在 [飞书开放平台](https://open.feishu.cn/) 为每个角色创建一个企业自建应用：
+在你的消息平台上为每个角色创建一个 Bot：
 
-1. 创建应用 → 启用 **机器人** 能力
-2. 权限：`im:message`, `im:message:send_as_bot`, `im:resource`, `im:chat:readonly`
-3. ⚠️ **关键权限**：`im:message.group_at_msg.include_bot:readonly`（机器人@机器人消息）
-4. 事件订阅 → 选择 **WebSocket** → 设置为 **「接收群中所有消息」**
-5. 发布应用版本
-6. 记录每个应用的 **App ID** 和 **App Secret**
+**飞书/Lark：**
+- [飞书开放平台](https://open.feishu.cn/) → 创建应用 → 启用机器人能力
+- 权限：`im:message`, `im:message:send_as_bot`, `im:resource`, `im:chat:readonly`
+- ⚠️ 关键权限：`im:message.group_at_msg.include_bot:readonly`
+
+**Telegram：**
+- 找 [@BotFather](https://t.me/BotFather) → `/newbot` → 获取 Token
+
+**Discord：**
+- [Discord Developer Portal](https://discord.com/developers/applications) → 创建应用 → 添加 Bot
+
+**Slack：**
+- [Slack API](https://api.slack.com/apps) → 创建 App → 添加 Bot
 
 ### Step 2: 初始化团队
 
@@ -152,13 +171,16 @@ hermes-team init --team-name MyTeam --roles pm,fe,be,qa,ui
 - 创建 5 个 Hermes Profile（`MyTeam-pm`, `MyTeam-fe`, ...）
 - 为每个角色生成对应的 SOUL.md 人设模板
 
-### Step 3: 配置飞书凭证
+### Step 3: 配置平台凭证
 
 ```bash
-hermes-team configure --prefix MyTeam
+hermes-team configure --prefix MyTeam --platform feishu
+# 或 Telegram: hermes-team configure --prefix MyTeam --platform telegram
+# 或 Discord:  hermes-team configure --prefix MyTeam --platform discord
+# 或 Slack:    hermes-team configure --prefix MyTeam --platform slack
 ```
 
-交互式输入每个角色的飞书 App ID 和 App Secret。
+交互式输入每个角色的平台凭证。
 
 ### Step 4: 启动 Gateway
 
@@ -227,8 +249,9 @@ hermes-team init --team-name MyTeam --clone-from weixin
 hermes-team configure [OPTIONS]
 
 Options:
-  --prefix TEXT    Profile 名称前缀  [required]
-  --dry-run        显示将要写入的内容，不实际写入
+  --prefix TEXT      Profile 名称前缀  [required]
+  --platform TEXT    平台类型 (feishu/telegram/discord/slack)  [required]
+  --dry-run          显示将要写入的内容，不实际写入
 ```
 
 ### `hermes-team start`
@@ -433,4 +456,6 @@ MIT License — 详见 [LICENSE](LICENSE)
 
 - [Hermes Agent](https://github.com/NousResearch/hermes-agent) — 底层 AI Agent 框架
 - [飞书开放平台](https://open.feishu.cn/) — 消息协作平台
+- [Telegram Bot API](https://core.telegram.org/bots/api) — Telegram 机器人平台
+- [Discord Developer Portal](https://discord.com/developers) — Discord 机器人平台
 - BaGoet 团队 — 第一个实战验证的多 Agent 团队
