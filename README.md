@@ -126,7 +126,7 @@ M总: "@主人 功能已完成 ✅"
 
 ```bash
 # 从源码安装
-git clone https://github.com/BaGoet/hermes-multi-agent-team.git
+git clone https://github.com/bagoetadrich/hermes-multi-agent-team.git
 cd hermes-multi-agent-team
 pip install -e .
 
@@ -238,7 +238,7 @@ hermes-team init --team-name BaGoet --prefix baoget
 hermes-team init --team-name MyTeam --roles pm,fe
 
 # 从已有 profile 克隆模型配置
-hermes-team init --team-name MyTeam --clone-from weixin
+hermes-team init --team-name MyTeam --clone-from my-base-profile
 ```
 
 ### `hermes-team configure`
@@ -414,7 +414,7 @@ Jinja2 变量：
 
 ```bash
 # 克隆仓库
-git clone https://github.com/BaGoet/hermes-multi-agent-team.git
+git clone https://github.com/bagoetadrich/hermes-multi-agent-team.git
 cd hermes-multi-agent-team
 
 # 安装开发依赖
@@ -431,7 +431,7 @@ ruff check .
 
 ## 📖 实战案例
 
-- [BaGoet 团队](examples/baogoet-team/) — 6 个 Agent 的修仙游戏开发团队
+- [BaGoet 团队](examples/baogoet-team/) — 6 个 Agent 的多角色协作团队实例
 
 ---
 

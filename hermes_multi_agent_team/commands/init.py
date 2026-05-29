@@ -136,7 +136,7 @@ def init_team(
             }
         )
 
-    # Add coordinator (the main profile, usually 'weixin')
+    # Add coordinator (the main profile)
     team_members.insert(
         0,
         {

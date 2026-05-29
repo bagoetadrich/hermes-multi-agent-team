@@ -2,7 +2,7 @@
 
 ## 背景
 
-BaGoet 是一个由 6 个 AI Agent 组成的飞书协作团队，服务于浮生仙途修仙游戏项目。
+BaGoet 是一个由 6 个 AI Agent 组成的飞书协作团队，用于验证 hermes-multi-agent-team 工具的实战效果。
 
 ## 团队成员
 
@@ -19,10 +19,10 @@ BaGoet 是一个由 6 个 AI Agent 组成的飞书协作团队，服务于浮生
 
 ```bash
 # 1. 初始化团队
-hermes-team init --team-name BaGoet --roles pm,fe,be,qa,ui --prefix baoget --clone-from weixin
+hermes-team init --team-name BaGoet --roles pm,fe,be,qa,ui --prefix baoget
 
 # 2. 配置飞书凭证（每个角色一个独立飞书App）
-hermes-team configure --prefix baoget
+hermes-team configure --prefix baoget --platform feishu
 
 # 3. 启动所有gateway
 hermes-team start --prefix baoget
@@ -40,7 +40,7 @@ hermes-team verify --prefix baoget
 1. **open_id per-app隔离** — 同一个人在不同bot视角下open_id不同
 2. **cli_xxx不能用于@mention** — 必须用ou_xxx格式
 3. **事件订阅必须选"接收群中所有消息"** — 否则bot收不到其他bot的消息
-4. **FEISHU_ALLOW_BOTS必须设为all** — 否则bot忽略其他bot的消息
-5. **FEISHU_REQUIRE_MENTION必须设为false** — 否则bot只响应被@的消息
+4. **ALLOW_BOTS必须设为all** — 否则bot忽略其他bot的消息
+5. **REQUIRE_MENTION必须设为false** — 否则bot只响应被@的消息
 
 详见 `README.md` 的 Pitfalls 章节。

@@ -239,7 +239,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## 📖 Case Study
 
-- [BaGoet Team](examples/baogoet-team/) — A 6-agent Xianxia game development team
+- [BaGoet Team](examples/baogoet-team/) — A 6-agent multi-role collaboration team
 
 ---
 

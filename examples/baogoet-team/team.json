@@ -8,9 +8,9 @@
     {"key": "qa", "name": "Q宝", "nickname": "小Q", "role": "测试QA", "template": "qa"},
     {"key": "ui", "name": "U酱", "nickname": "小U", "role": "UI设计", "template": "designer"}
   ],
-  "clone_from": "weixin",
+  "platform": "feishu",
   "model": {
-    "default": "mimo-v2.5-pro",
-    "provider": "xiaomi"
+    "default": "your-model-name",
+    "provider": "your-provider"
   }
 }
