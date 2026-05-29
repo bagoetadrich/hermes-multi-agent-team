@@ -8,9 +8,10 @@ from hermes_multi_agent_team import __version__
 @click.group()
 @click.version_option(version=__version__, prog_name="hermes-team")
 def cli() -> None:
-    """🚀 hermes-multi-agent-team — Automate multi-agent team setup for Hermes + Feishu.
+    """🚀 hermes-multi-agent-team — Automate multi-agent team setup for Hermes + Messaging Platforms.
 
-    Set up, configure, and manage a team of AI agents on Feishu using Hermes profiles.
+    Set up, configure, and manage a team of AI agents on Feishu, Telegram, Discord, or Slack
+    using Hermes profiles.
     """
     pass
 
