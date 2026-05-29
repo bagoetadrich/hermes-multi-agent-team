@@ -1,0 +1,16 @@
+{
+  "team_name": "BaGoet",
+  "prefix": "baoget",
+  "roles": [
+    {"key": "pm", "name": "P酱", "nickname": "小P", "role": "产品经理", "template": "pm"},
+    {"key": "fe", "name": "F仔", "nickname": "小F", "role": "前端开发", "template": "frontend"},
+    {"key": "be", "name": "B叔", "nickname": "小B", "role": "后端开发", "template": "backend"},
+    {"key": "qa", "name": "Q宝", "nickname": "小Q", "role": "测试QA", "template": "qa"},
+    {"key": "ui", "name": "U酱", "nickname": "小U", "role": "UI设计", "template": "designer"}
+  ],
+  "clone_from": "weixin",
+  "model": {
+    "default": "mimo-v2.5-pro",
+    "provider": "xiaomi"
+  }
+}
